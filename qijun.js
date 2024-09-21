@@ -25,4 +25,4 @@ function toggleTilt() {
 moveWalker();
 
 // Change tilt every 1 second
-setInterval(toggleTilt, 1000);
+setInterval(toggleTilt, 400);
