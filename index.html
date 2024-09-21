@@ -1,20 +1,21 @@
 <html>
   <head>
-    <title>Ryan's website</title>
+    <title>Creature haven</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
   </head>
   <body>
-    <h1>Greetings from Jarrel</h1>
+    <h1>Creature haven</h1>
     <p>by Ong Ryan</p>
     <div class="Jarrel">
       <img src="https://i.ibb.co/DgyFzwh/jarrelcreature.png" width="500" height="500" alt="jarrel creature">
     </div>
     <script src="script.js"></script>
   </body>
+
   <div id="qijun">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Walking Image</title>
+  
     <style>
         body, html {
             margin: 0;
@@ -34,23 +35,7 @@
     </style>
     <div id="walker"></div>
 
-    <script>
-        const walker = document.getElementById('walker');
-        let position = -100;
-        const windowWidth = window.innerWidth;
-        
-        function moveWalker() {
-            position += 5;
-            walker.style.left = position + 'px';
-
-            if (position > windowWidth) {
-                position = -100;
-            }
-            
-            requestAnimationFrame(moveWalker);
-        }
-
-        moveWalker();
+    <script src="qijun.js">
     </script>
 </div>
 <p>qijun</p>
