@@ -1,26 +1,28 @@
 const walker = document.getElementById('walker');
-        let position = -100;
-        let tiltDirection = 1;
-        let frameCounter = 0;
-        const windowWidth = window.innerWidth;
+let position = -100;
+let tiltDirection = 1;
+const windowWidth = window.innerWidth;
 
-        function moveWalker() {
-            position += 5;
-            walker.style.left = position + 'px';
+// Function to move the walker image smoothly
+function moveWalker() {
+    position += 5;
+    walker.style.left = position + 'px';
 
-            // Change tilt direction every 10 frames
-            if (frameCounter % 10 === 0) {
-                walker.style.transform = `rotate(${tiltDirection * 10}deg)`;
-                tiltDirection *= -1; // Reverse the tilt direction
-            }
+    if (position > windowWidth) {
+        position = -100;
+    }
 
-            frameCounter++;
+    requestAnimationFrame(moveWalker);
+}
 
-            if (position > windowWidth) {
-                position = -100;
-            }
+// Function to toggle tilt every 1 second
+function toggleTilt() {
+    walker.style.transform = `rotate(${tiltDirection * 10}deg)`;
+    tiltDirection *= -1; // Reverse the tilt direction
+}
 
-            requestAnimationFrame(moveWalker);
-        }
+// Start the movement
+moveWalker();
 
-        moveWalker();
+// Change tilt every 1 second
+setInterval(toggleTilt, 1000);
