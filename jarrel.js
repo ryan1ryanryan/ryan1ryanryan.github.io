@@ -1,34 +1,28 @@
-const floatAnimation = () => {
-         const tlCan = new TimelineMax({repeat:-1});
-         /*Can Animation*/
-        tlCan
-            //move top left
-        .to('.Jarrel > img', 3, { y:'-=30', x:'+=20',  rotation:'-=5', ease:Power1.easeInOut})
-        
-            //move down right
-        .to('.Jarrel > img', 2, { y:'+=30', x:'-=20', rotation:'-=5', ease:Power1.easeInOut})
-        
-        
-        .to('.Jarrel > img', 3, { y:'-=20',  rotation:'+=5', ease:Power1.easeInOut})
-        
-        .to('.Jarrel > img', 3, { y:'+=20',  rotation:'+=5', ease:Power1.easeInOut})
-        
-        
-        .to('.Jarrel > imgn', 3, { y:'-=50', ease:Power1.easeInOut})
-           
-        .to('.Jarrel > img', 3, { y:'+=50', ease:Power1.easeInOut})
-        
-        
-        .to('.Jarrel > img', 3, { y:'-=30', ease:Power1.easeInOut})
-           
-        .to('.Jarrel > img', 3, { y:'+=30', ease:Power1.easeInOut})
-        
-        
-        .to('.Jarrel > img', 2, { y:'-=30', ease:Power1.easeInOut})
-           
-        .to('.Jarrel > img', 2, { y:'+=30', ease:Power1.easeInOut})
-  
-      TweenLite.to(tlCan, 27, {ease:Power1.easeInOut})
+const walker = document.getElementById('jarrel');
+let position = -100;
+let tiltDirection = 1;
+const windowWidth = window.innerWidth;
 
+// Function to move the walker image smoothly
+function moveWalker() {
+    position += 5;
+    walker.style.left = position + 'px';
+
+    if (position > windowWidth) {
+        position = -100;
     }
-    floatAnimation();
+
+    requestAnimationFrame(moveWalker);
+}
+
+// Function to toggle tilt every 1 second
+function toggleTilt() {
+    walker.style.transform = `rotate(${tiltDirection * 10}deg)`;
+    tiltDirection *= -1; // Reverse the tilt direction
+}
+
+// Start the movement
+moveWalker();
+
+// Change tilt every 1 second
+setInterval(toggleTilt, 400);
