@@ -21,8 +21,10 @@ function toggleTilt() {
     tiltDirection *= -1; // Reverse the tilt direction
 }
 
-// Start the movement
-moveWalker();
+// Start the movement after 2 seconds
+setTimeout(() => {
+    moveWalker();
+}, 2000);
 
-// Change tilt every 1 second
+// Change tilt every 400 milliseconds
 setInterval(toggleTilt, 400);
