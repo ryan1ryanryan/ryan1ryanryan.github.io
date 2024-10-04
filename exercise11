@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle and Rectangle</title>
+    <style>
+        /* Styling for the rectangle */
+        #rectangle {
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+        }
+
+        /* Styling for the circle */
+        #circle {
+            width: 150px;
+            height: 150px;
+            background-color: yellow;
+            border: 5px solid red;
+            border-radius: 50%;
+            position: absolute;
+            top: 80px;
+            left: 120px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Rectangle -->
+    <div id="rectangle"></div>
+    <!-- Circle -->
+    <div id="circle"></div>
+</body>
+</html>
