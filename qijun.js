@@ -1,4 +1,4 @@
-const walker = document.getElementById('walker');
+const walker = [document.getElementById('qijun'), document.getElementById('jarrel')];
 let position = -100;
 let tiltDirection = 1;
 const windowWidth = window.innerWidth;
