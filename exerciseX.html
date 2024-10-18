@@ -3,35 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic TWD to USD Exchange Rate Tracker</title>
+    <title>TWD to USD Exchange Rate Tracker</title>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+      let chart; // Store the chart globally
+      let dataTable; // Store the dataTable globally
 
-      function drawChart() {
-        fetch('https://api.exchangerate-api.com/v4/latest/TWD')
+      function drawChart(data) {
+        // Create data table
+        if (!dataTable) {
+          dataTable = new google.visualization.DataTable();
+          dataTable.addColumn('string', 'Date');
+          dataTable.addColumn('number', 'TWD to USD');
+        }
+
+        // Add new data
+        for (let date in data.rates) {
+          dataTable.addRow([date, data.rates[date].USD]);
+        }
+
+        // Chart options
+        const options = {
+          title: 'TWD to USD Exchange Rate from Jan 2022 to Today',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          hAxis: { title: 'Date' },
+          vAxis: { title: 'Exchange Rate (TWD to USD)' }
+        };
+
+        // Create chart if it doesn't exist
+        if (!chart) {
+          chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+        }
+
+        // Draw chart
+        chart.draw(dataTable, options);
+      }
+
+      function fetchExchangeRates() {
+        fetch('https://api.exchangerate-api.com/v4/history/TWD?start=2022-01-01&end=2024-10-18')
           .then(response => response.json())
           .then(data => {
-            var usdRate = data.rates.USD;
-            var chartData = google.visualization.arrayToDataTable([
-              ['Date', 'TWD to USD'],
-              ['2024-10-12', usdRate]
-            ]);
-
-            var options = {
-              title: 'TWD to USD Exchange Rate',
-              curveType: 'function',
-              legend: { position: 'bottom' },
-              hAxis: { title: 'Date' },
-              vAxis: { title: 'Exchange Rate (TWD to USD)' }
-            };
-
-            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-            chart.draw(chartData, options);
+            drawChart(data);
           })
-          .catch(error => console.error('Error fetching exchange rate:', error));
+          .catch(error => console.error('Error fetching historical exchange rate:', error));
       }
+
+      // Fetch data initially and then every 24 hours (86400000 milliseconds)
+      window.onload = () => {
+        fetchExchangeRates(); // Fetch immediately on load
+        setInterval(fetchExchangeRates, 86400000); // Fetch every 24 hours
+      };
     </script>
 </head>
 <body>
