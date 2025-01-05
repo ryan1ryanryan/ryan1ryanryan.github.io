@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Circle Calculator</title>
+<style>
+body {
+  font-family: sans-serif;
+}
+#results {
+  margin-top: 20px;
+}
+</style>
+</head>
+<body>
+
+<h1>Circle Property Calculator</h1>
+
+<label for="radius">Radius:</label>
+<input type="number" id="radius" value="5">
+
+<button onclick="calculate()">Calculate</button>
+
+<div id="results">
+  <p id="circumference"></p>
+  <p id="area"></p>
+</div>
+
+<script>
+function calcCircumfrence(radius) {
+  const circumference = 2 * Math.PI * radius;
+  document.getElementById("circumference").textContent = "The circumference is " + circumference.toFixed(2); //toFixed to show 2 decimals
+}
+
+function calcArea(radius) {
+  const area = Math.PI * radius * radius;
+  document.getElementById("area").textContent = "The area is " + area.toFixed(2); //toFixed to show 2 decimals
+}
+
+function calculate() {
+  const radius = parseFloat(document.getElementById("radius").value);
+  if (isNaN(radius) || radius < 0) {
+    alert("Please enter a valid positive number for the radius.");
+    return;
+  }
+  calcCircumfrence(radius);
+  calcArea(radius);
+}
+</script>
+
+</body>
+</html>
